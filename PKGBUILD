@@ -1,19 +1,19 @@
 # Maintainer:
 
-pkgname=st-luke-git
+pkgname=st-dave-git
 _pkgname=st
-pkgver=0.8.2.r1062.2087ab9
+pkgver=0.8.2.r1102.6b62b1c
 pkgrel=1
 epoch=1
 pkgdesc="Luke's simple (suckless) terminal with vim-bindings, transparency, xresources, etc. "
-url='https://github.com/LukeSmithxyz/st'
+url='https://github.com/Dave-Elec/st'
 arch=('i686' 'x86_64')
 license=('MIT')
 options=('zipman')
 depends=('libxft')
 makedepends=('ncurses' 'libxext' 'git')
 optdepends=('dmenu: feed urls to dmenu')
-source=('git://github.com/LukeSmithxyz/st')
+source=('git://github.com/Dave-Elec/st')
 sha1sums=('SKIP')
 
 provides=("${_pkgname}")
@@ -39,6 +39,7 @@ build() {
 package() {
 	cd "${_pkgname}"
 	make PREFIX=/usr DESTDIR="${pkgdir}" install
+	install -Dm644 st.desktop "${pkgdir}/usr/share/applications/st.desktop"
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 	install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
 	install -Dm644 .Xdefaults "${pkgdir}/usr/share/doc/${pkgname}/Xdefaults.example"
