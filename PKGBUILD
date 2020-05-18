@@ -2,10 +2,10 @@
 
 pkgname=st-dave-git
 _pkgname=st
-pkgver=0.8.2.r1102.6b62b1c
+pkgver=0.8.2.r1112.55cdc42
 pkgrel=1
 epoch=1
-pkgdesc="Luke's simple (suckless) terminal with vim-bindings, transparency, xresources, etc. "
+pkgdesc="Dave's simple (suckless) terminal with vim-bindings, transparency, xresources, etc. "
 url='https://github.com/Dave-Elec/st'
 arch=('i686' 'x86_64')
 license=('MIT')
@@ -42,5 +42,4 @@ package() {
 	install -Dm644 st.desktop "${pkgdir}/usr/share/applications/st.desktop"
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 	install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
-	install -Dm644 .Xdefaults "${pkgdir}/usr/share/doc/${pkgname}/Xdefaults.example"
 }

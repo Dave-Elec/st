@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c
+SRC = st.c x.c boxdraw.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -23,6 +23,7 @@ config.h:
 
 st.o: config.h st.h win.h
 x.o: arg.h config.h st.h win.h
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
@@ -30,7 +31,7 @@ st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	rm -f st $(OBJ) st-$(VERSION).tar.gz *.o *.orig *.rej
 
 dist: clean
 	mkdir -p st-$(VERSION)
@@ -44,8 +45,10 @@ install: st
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f st $(DESTDIR)$(PREFIX)/bin
 	cp -f st-copyout $(DESTDIR)$(PREFIX)/bin
+	cp -f st-urlhandler $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-copyout
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
 	cp -f st.desktop $(DESTDIR)$(PREFIX)/share/applications
 	chmod 755 $(DESTDIR)$(PREFIX)/share/applications
@@ -58,6 +61,7 @@ install: st
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(PREFIX)/bin/st-copyout
+	rm -f $(DESTDIR)$(PREFIX)/bin/st-urlhandler
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
 
